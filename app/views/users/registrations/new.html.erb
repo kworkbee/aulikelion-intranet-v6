@@ -1,0 +1,19 @@
+<section class="container">
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+  <h2><i class="fas fa-user"></i> 회원가입</h2>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true, placeholder: "이메일" %>
+    <%= f.input :password, required: true, hint: ("최소 #{@minimum_password_length}글자 이상" if @minimum_password_length), placeholder: "패스워드" %>
+    <%= f.input :password_confirmation, required: true, placeholder: "패스워드 재확인" %>
+  </div>
+  <div class="shared">
+  <%= render "users/shared/links" %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, "회원가입" %>
+  </div>
+<% end %>
+
+</section>

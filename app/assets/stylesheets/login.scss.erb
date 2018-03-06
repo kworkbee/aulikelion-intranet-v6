@@ -1,0 +1,146 @@
+$base-color: #F7971E;
+
+* {
+    font-family: "Montserrat", "KoPub Dotum", sans-serif;
+}
+
+body {
+    margin: 0; padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $base-color;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFD200, $base-color);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFD200, $base-color); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.cover {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,.2);
+    z-index: 0;
+}
+
+.valign-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
+    min-height: 400px;
+    background: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 15px 1px rgba(39, 39, 39, 0.1);
+    box-shadow: 0 1px 15px 1px rgba(39, 39, 39, 0.1);
+    z-index: 1;
+    & header {
+        position: relative;
+        width: 30%;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1vh;
+        background: $base-color !important;
+        color: white;
+        border-radius: 5px 0 0 5px;
+        padding: 1rem;
+        & .likelion {
+            background: url('<%= image_path "likelion.png" %>') no-repeat center center/contain;
+            width: 100%;
+            height: 100px;
+            text-indent: -9999px;
+        }
+        & footer {
+            position: absolute;
+            background: url('https://d2hmp4n7p97ldw.cloudfront.net/assets/logo/likelion-white-a930fbcdf3042a50ba882ece9c02f43536971297a8e143e212d9b92d653bfa44.png') no-repeat center center/contain;
+            width: 100%;
+            height: 20px;
+            bottom: 16px;
+            left: 50%;
+            text-indent: -9999px;
+            transform: translateX(-50%);
+        }
+    }
+    
+    & .container {
+        width: 70%;
+    }
+}
+
+.container {
+    position: relative;
+    & form[novalidate] {
+        position: relative;
+        & h2 {
+            text-align: center;
+            font-size: 2vw;
+            font-weight: 100;
+            margin: 2rem 0 0 0;
+        }
+        & .form-inputs {
+            padding: 2rem;
+            & input {
+                width: 100%;
+                font-size: 1.5rem;
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+        & label {
+            display: none;
+        }
+        & input[type='submit'] {
+            width: 100%;
+            background: #ff5e52;
+            padding: 1rem 0;
+            color: white;
+            border-radius: 0 0 5px 0;
+            transition: all .2s ease-in;
+            &:hover {
+                background: red;
+            }
+        }
+        & .shared {
+            & a {
+                display: block;
+                width: 50%;
+                text-decoration: none;
+                text-align: center;
+                padding: .6rem 0;
+                margin: 0 auto;
+                border-radius: 2rem;
+                border: 2px solid tomato;
+                color: tomato;
+                font-weight: 700;
+                font-size: 1.2rem;
+                transition: all .3s ease-out;
+                &:hover {
+                    background: tomato;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .valign-wrapper {
+        min-width: 80%;
+    }
+}
+
+@media (max-width: 720px) {
+    .valign-wrapper {
+        flex-direction: column;
+        & header {
+            width: 100%;
+            min-height: 300px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        & .container {
+            width: 100%;
+            min-height: 300px;
+        }
+    }
+}

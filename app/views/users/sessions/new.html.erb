@@ -1,0 +1,15 @@
+<section class="container">
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+  <h2><i class="fas fa-lock"></i> 로그인이 필요합니다</h2>
+  <div class="form-inputs">
+    <%= f.input :email, required: false, autofocus: true, placeholder: "이메일" %>
+    <%= f.input :password, required: false, placeholder: "패스워드" %>
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+  <div class="shared">
+    <%= render "users/shared/links" %>
+  </div>
+  <%= f.button :submit, "로그인" %>
+<% end %>
+</section>

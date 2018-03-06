@@ -1,0 +1,31 @@
+<section class="container">
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <h2><i class="fas fa-cog"></i> 정보 변경</h2>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p><%= resource.unconfirmed_email %> 이메일 인증이 완료되지 않았습니다.</p>
+    <% end %>
+
+    <%= f.input :password, autocomplete: "off", hint: "변경하지 않으려면 빈칸으로 두세요.", required: false, placeholder: "변경할패스워드" %>
+    <%= f.input :password_confirmation, required: false, placeholder: "패스워드 재확인"   %>
+    <%= f.input :current_password, hint: "정보 변경을 위해 비밀번호 입력이 필요합니다.", required: true, placeholder: "현재 패스워드" %>
+  </div>
+ 
+  <div class="shared">
+    <%= link_to "돌아가기", :back %>
+    <br>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.button :submit, "정보 변경" %>
+  </div>
+  
+<% end %>
+
+
+</section>
