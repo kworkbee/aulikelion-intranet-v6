@@ -1,2 +1,31 @@
-<h1>Intranet#gallery</h1>
-<p>Find me in app/views/intranet/gallery.html.erb</p>
+<div class="panel-header panel-header-lg center-header">
+    <header>사진 갤러리</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">GALLERY</div>
+                <div class="card-body">
+                    <div class="pics">
+                        <div class="row" style="margin: 0 1rem;">
+                            <article class="pic col-md-3">
+                                <%= image_tag "http://placeimg.com/300/300/any" %>
+                                <hr>
+                                <h5>Title</h5>
+                                <h6>Uploader</h6>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-2 offset-md-10">
+                            <button class="btn btn-primary btn-block">사진 업로드</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

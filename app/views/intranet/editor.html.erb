@@ -1,0 +1,43 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>게시물 작성</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <%= form_for @post, url: create_post_path do |form| %>
+            <% if current_page?(nedit_path) %>
+                <%= form.hidden_field :category, value: "1" %>
+            <% elsif current_page?(fedit_path) %>
+                <%= form.hidden_field :category, value: "2" %>
+            <% end %>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">
+                    <% if current_page?(nedit_path) %>
+                    NOTICE
+                    <% elsif current_page?(fedit_path) %>
+                    FREEBOARD
+                    <% end %>
+                    </h5>
+                    <h4 class="card-title">
+                    <% if current_page?(nedit_path) %>
+                    공지사항
+                    <% elsif current_page?(fedit_path) %>
+                    자유게시판
+                    <% end %>
+                    게시물 작성
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <%= form.text_field :title, class: 'title input-text', placeholder: "제목을 입력하세요", autofocus: "on" %>
+                    <%= form.label :title, "제목", class: "input-label" %>
+                    <%= form.cktext_area :content, cols: 400, ckeditor: { uiColor: '#F2F3F5', height: '60vh' } %>
+                </div>
+                <div class="card-footer">
+                    <%= form.submit "게시물 생성", class: "btn btn-primary" %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>게시물 보기</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">
+                        <% case @post.category %>
+                        <% when 1 %>
+                        NOTICE
+                        <% when 2 %>
+                        FREEBOARD
+                        <% end %>
+                    </h5>
+                    <h4 class="card-title">
+                        <%= @post.title %>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <%= @post.content.html_safe %>
+                </div>
+                <div class="card-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

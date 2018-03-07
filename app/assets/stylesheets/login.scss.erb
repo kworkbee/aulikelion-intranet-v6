@@ -10,9 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $base-color;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FFD200, $base-color);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FFD200, $base-color); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: url('<%= image_path "background.jpg" %>') no-repeat center center/cover;
 }
 
 .cover {
@@ -31,8 +29,8 @@ body {
     min-height: 400px;
     background: white;
     border-radius: 5px;
-    -webkit-box-shadow: 0 1px 15px 1px rgba(39, 39, 39, 0.1);
-    box-shadow: 0 1px 15px 1px rgba(39, 39, 39, 0.1);
+    -webkit-box-shadow: 0 1px 15px 1px rgba(39, 39, 39, .8);
+    box-shadow: 0 1px 15px 1px rgba(39, 39, 39, .8);
     z-index: 1;
     & header {
         position: relative;

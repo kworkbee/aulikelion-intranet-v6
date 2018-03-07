@@ -1,6 +1,44 @@
 <div class="panel-header panel-header-lg center-header">
     <header>소속 멤버 보기</header>
 </div>
-<% @members.each do |member| %>
-    <%= member %>
-<% end %>
+<div class="content">
+    <div class="row">
+        <div class="col-4">
+           <% @members.each do |member| %>
+            <div class="card card-user">
+                <div class="image">
+                    <%= image_tag "background.jpg" %>
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                         <a href="#">
+                        <img class="avatar border-gray" src="http://placehold.it/300/300/fff?text=USER" alt="Member_<%= member.id %>_thumbnail">
+                            <h5 class="title"><%= member.email %></h5>
+                        </a>
+                        <p class="description">
+                            michael24
+                        </p>
+                    </div>
+                    <p class="description text-center">
+                        "Lamborghini Mercy <br>
+                        Your chick she so thirsty <br>
+                        I'm in that two seat Lambo"
+                    </p>
+                </div>
+                <hr>
+                <div class="button-container">
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-google-plus-g"></i>
+                    </button>
+                </div>
+            </div>
+            <% end %> 
+        </div>
+    </div>
+</div>

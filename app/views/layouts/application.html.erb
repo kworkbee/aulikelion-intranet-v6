@@ -10,11 +10,12 @@
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag Ckeditor.cdn_url %>
 </head>
 <body>
 <div class="wrapper">
-  <div class="sidebar" data-color="blue">
+  <div class="sidebar" data-color="orange">
         <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
         <div class="logo">
             <a href="http://aulikelion.github.io" class="simple-text logo-mini">
@@ -45,9 +46,15 @@
                     </a>
                 </li>
                 <li class="<%= @homework %>">
-                    <a href="../notifications.html">
+                    <a href="<%= homework_path %>">
                         <i class="fas fa-sticky-note"></i>
                         <p>과제</p>
+                    </a>
+                </li>
+                <li class="<%= @gallery %>">
+                    <a href="<%= intranet_gallery_path %>">
+                        <i class="far fa-image"></i>
+                        <p>사진</p>
                     </a>
                 </li>
             </ul>
@@ -73,9 +80,9 @@
                 <span class="navbar-toggler-bar navbar-kebab"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                <form>
+                <form method="GET" action="<%= search_path %>">
                     <div class="input-group no-border">
-                        <input type="text" value="" class="form-control" placeholder="검색">
+                        <input type="text" name="keyword" class="form-control" placeholder="검색">
                         <span class="input-group-addon">
                             <i class="fas fa-search"></i>
                         </span>
@@ -108,14 +115,44 @@
     </nav>
     <!-- End Navbar -->
     <%= yield %>
+    
+    <footer class="footer">
+    <div class="container-fluid">
+        <nav>
+            <ul>
+                <li>
+                    <a href="http://likelion.org">
+                        LIKELION
+                    </a>
+                </li>
+                <li>
+                    <a href="http://aulikelion.github.io">
+                        아주대학교 멋쟁이사자처럼
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>, Organization by
+            <a href="http://www.likelion.org" target="_blank">LIKELION</a>. Coded by J.W.Jeon (4th).
+        </div>
+    </div>
+</footer>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.2/rails.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.8.1/js/perfect-scrollbar.jquery.min.js"></script>
-<%= javascript_include_tag 'application' %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.8.1/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert2@7.15.0/dist/sweetalert2.all.js"></script>
+<% if !flash.empty? then %>
+<script>
+    <% flash.keys.each do |f| %>
+    swal(<%= f.capitalize %>, <%= flash[f] %>, 'success');
+    <% end %>
+</script>
+<% end %>
 </body>
 </html>

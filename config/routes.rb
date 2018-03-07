@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   root to: "intranet#dashboard"
-  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     passwords: 'users/passwords'
   }
   
+  resources :posts
   get '/intranet/members'
+  get '/intranet/members/:id' => "intranet#personal", as: :member
   get '/intranet/dashboard'
   get '/intranet/notice'
   get '/intranet/freeboard'
   get '/intranet/gallery'
-  get '/intranet/writer'
-  get '/intranet/notice_view'
-  get '/intranet/freeboard_view'
+  get '/intranet/homework', as: :homework
+  get '/intranet/search', as: :search
+  get '/intranet/notice/write' => 'intranet#editor', as: :nedit
+  get '/intranet/freeboard/write' => 'intranet#editor', as: :fedit
+  post '/intranet/post/save' => 'intranet#savePost', as: :create_post
+  get '/intranet/post/view/:id' => 'intranet#viewPost', as: :view
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

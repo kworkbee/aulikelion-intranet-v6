@@ -1,2 +1,45 @@
-<h1>Intranet#freeboard</h1>
-<p>Find me in app/views/intranet/freeboard.html.erb</p>
+<div class="panel-header panel-header-lg center-header">
+    <header>자유게시판</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">FREEBOARD</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @post.each do |p| %>
+                                <tr>
+                                    <td><%= p.id %></td>
+                                    <td><%= link_to p.title, view_path(p.id) %></td>
+                                    <td><!-- link_to p.user.id, member_path(p.user.id) --></td>
+                                    <td><%= p.created_at.strftime("%m/%d") %></td>
+                                    <td></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-2 offset-md-10">
+                            <%= link_to "게시물 작성", fedit_path, class: "btn btn-primary btn-block" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
