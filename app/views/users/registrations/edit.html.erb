@@ -5,8 +5,6 @@
 
   <h2><i class="fas fa-cog"></i> 정보 변경</h2>
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p><%= resource.unconfirmed_email %> 이메일 인증이 완료되지 않았습니다.</p>
     <% end %>

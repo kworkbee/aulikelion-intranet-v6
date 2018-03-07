@@ -30,6 +30,8 @@ gem 'ckeditor'
 gem 'paperclip'
 gem 'perfect-scrollbar-rails'
 gem 'chart-js-rails'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

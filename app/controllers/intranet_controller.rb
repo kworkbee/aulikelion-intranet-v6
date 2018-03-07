@@ -22,6 +22,11 @@ class IntranetController < ApplicationController
     @gallery = "active"
     @title = "Gallery"
   end
+  
+  def events
+    @event = "active"
+    @title = "EVENT"
+  end
 
   def homework
     @homework = "active"

@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require Chart.min
+//= require moment 
+//= require fullcalendar
 //= require perfect-scrollbar
 //= require_tree .
 //= stub login

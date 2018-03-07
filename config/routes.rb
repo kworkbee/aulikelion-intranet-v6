@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/intranet/notice'
   get '/intranet/freeboard'
   get '/intranet/gallery'
+  get '/intranet/events', as: :event
   get '/intranet/homework', as: :homework
   get '/intranet/search', as: :search
   get '/intranet/notice/write' => 'intranet#editor', as: :nedit

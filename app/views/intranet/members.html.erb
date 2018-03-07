@@ -3,7 +3,7 @@
 </div>
 <div class="content">
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-6 col-lg-4">
            <% @members.each do |member| %>
             <div class="card card-user">
                 <div class="image">
@@ -13,10 +13,10 @@
                     <div class="author">
                          <a href="#">
                         <img class="avatar border-gray" src="http://placehold.it/300/300/fff?text=USER" alt="Member_<%= member.id %>_thumbnail">
-                            <h5 class="title"><%= member.email %></h5>
+                            <h5 class="title"><%= member.name %></h5>
                         </a>
                         <p class="description">
-                            michael24
+                            <%= member.email %>
                         </p>
                     </div>
                     <p class="description text-center">
