@@ -53,7 +53,15 @@
                   <div class="row">
                     <div class="col-6">
                       <span class="subtitle">신규과제</span><br>
-                      <span class="big">N</span>건
+                      <span class="big">
+                        <% nCount = 0 %>
+                        <% Homework.all.each do |h| %>
+                          <% if h.submissions.where(user_id: current_user.id).count == 0 %>
+                            <% nCount += 1 %>
+                          <% end %>
+                        <% end %>
+                        <%= nCount %>
+                      </span>건
                     </div>
                     <div class="col-6">
                       <span class="subtitle">미완료과제</span><br>
@@ -70,90 +78,7 @@
         </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <div class="card card-tasks">
-          <div class="card-header">
-            <h5 class="card-category">Backend development</h5>
-            <h4 class="card-title">Tasks</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-full-width table-responsive">
-              <table class="table">
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" checked="">
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                        </td>
-
-                        <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                <i class="now-ui-icons ui-2_settings-90"></i>
-                            </button>
-                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                <i class="now-ui-icons ui-1_simple-remove"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                        </td>
-
-                        <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                <i class="now-ui-icons ui-2_settings-90"></i>
-                            </button>
-                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                <i class="now-ui-icons ui-1_simple-remove"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" checked="">
-                                    <span class="form-check-sign"></span>
-                                </label>
-                            </div>
-                        </td>
-
-                        <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                <i class="now-ui-icons ui-2_settings-90"></i>
-                            </button>
-                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                <i class="now-ui-icons ui-1_simple-remove"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="card-footer">
-            <hr>
-            <div class="stats">
-              <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
-            </div>
-          </div>
-      </div>
-      </div>
-      <div class="col-md-6">
+      <div class="col-md-12">
           <div class="card">
             <div class="card-header">
                 <h5 class="card-category">RECENT POSTS</h5>
@@ -169,22 +94,35 @@
                       <th>
                         제목
                       </th>
-                      <th >
+                      <th>
                         작성자
+                      </th>
+                      <th>
+                        작성일
                       </th>
                     </thead>
                     <tbody>
-                      <tr >
-                        <td >
-                          Dakota Rice
+                      <% Post.where(created_at: 1.week.ago..DateTime.now).each do |p| %>
+                      <tr>
+                        <td>
+                          <% case p.category %>
+                          <% when 1 %>
+                          공지사항
+                          <% when 2 %>
+                          자유게시판
+                          <% end %>
                         </td>
-                        <td >
-                          Niger
+                        <td>
+                          <%= link_to p.title, view_path(p.id) %>
                         </td>
-                        <td >
-                          Oud-Turnhout
+                        <td>
+                          <%= link_to p.user.name, member_path(p.user.id) %>
+                        </td>
+                        <td>
+                          <%= p.created_at.strftime("%m/%d") %>
                         </td>
                       </tr>
+                      <% end %>
                     </tbody>
                   </table>
                 </div>

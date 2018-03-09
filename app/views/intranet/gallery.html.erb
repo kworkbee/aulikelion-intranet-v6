@@ -9,21 +9,19 @@
                 <div class="card-body">
                     <div class="pics">
                         <div class="row" style="margin: 0 1rem;">
-                            <article class="pic col-md-3">
-                                <%= image_tag "http://placeimg.com/300/300/any" %>
+                            <% @image.each do |image| %>
+                            <article class="pic col-md-4 col-lg-6">
+                                <%= image_tag image.file %>
                                 <hr>
-                                <h5>Title</h5>
-                                <h6>Uploader</h6>
+                                <h5><%= image.title %></h5>
+                                <h6><%= link_to image.user.name, member_path(image.user.id) %></h6>
                             </article>
+                            <% end %>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="row">
-                        <div class="col-md-2 offset-md-10">
-                            <button class="btn btn-primary btn-block">사진 업로드</button>
-                        </div>
-                    </div>
+                    <%= link_to "사진 업로드", new_image_path, class: "btn btn-primary btn-block" %>
                 </div>
             </div>
         </div>

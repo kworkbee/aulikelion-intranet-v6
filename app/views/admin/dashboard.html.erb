@@ -1,0 +1,48 @@
+<div class="panel-header panel-header-lg">
+    <canvas id="bigDashboardChart"></canvas>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-6 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">과제 관리</h5>
+                    <h4 class="card-title">생성된 과제 <%= @homeworks.count %>건</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>과제명</th>
+                                    <th>마감일</th>
+                                    <th>제출자 현황(제출/총원)</th>
+                                    <th>변경/삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @homeworks.each do |h| %>
+                                <tr>
+                                    <td><%= h.id %></td>
+                                    <td><%= link_to h.title, homework_path(h.id) %></td>
+                                    <td><%= h.closing.strftime("%m/%d") %></td>
+                                    <td><%= h.submissions.count %>/<%= User.all.count %></td>
+                                    <td>
+                                        <%= link_to "수정", edit_homework_path(h.id), class: "btn btn-warning btn-sm" %>
+                                        <%= link_to "삭제", homework_path(h.id), class: "btn btn-danger btn-sm", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까? 삭제 시 복구가 불가능합니다." %>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <%= link_to "과제 생성", new_homework_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>

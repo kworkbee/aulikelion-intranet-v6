@@ -32,6 +32,8 @@ gem 'perfect-scrollbar-rails'
 gem 'chart-js-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'mini_magick'
+gem 'puma'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -23,9 +23,9 @@
                                 <tr>
                                     <td><%= p.id %></td>
                                     <td><%= link_to p.title, view_path(p.id) %></td>
-                                    <td><!-- link_to p.user.id, member_path(p.user.id) --></td>
+                                    <td><%= link_to p.user.name, member_path(p.user.id) %></td>
                                     <td><%= p.created_at.strftime("%m/%d") %></td>
-                                    <td></td>
+                                    <td><%= p.views.count %></td>
                                 </tr>
                                 <% end %>
                             </tbody>
@@ -33,11 +33,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="row">
-                        <div class="col-md-2 offset-md-10">
-                            <%= link_to "게시물 작성", fedit_path, class: "btn btn-primary btn-block" %>
-                        </div>
-                    </div>
+                    <%= link_to "게시물 작성", fedit_path, class: "btn btn-primary btn-block" %>
                 </div>
             </div>
         </div>

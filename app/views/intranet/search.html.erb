@@ -10,11 +10,32 @@
                     <h4 class="card-title">게시물에서</h4>
                 </div>
                 <div class="card-body">
-                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>구분</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @fromPost.each do |p| %>
+                                <tr>
+                                    <td><% case p.category %><% when 1 %>공지사항<% when 2 %>자유게시판<% end %></td>
+                                    <td><%= link_to p.title, view_path(p.id) %></td>
+                                    <td><%= link_to p.user.name, member_path(p.user.id) %></td>
+                                    <td><%= p.created_at.strftime("%m/%d") %></td>
+                                    <td><%= p.views.count %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    
-                </div>
+                <div class="card-footer"></div>
             </div>
         </div>
     </div>
@@ -26,7 +47,24 @@
                     <h4 class="card-title">멤버 중에서</h4>
                 </div>
                 <div class="card-body">
-                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>구분</th>
+                                    <th>이름</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @fromMembers.each do |m| %>
+                                <tr>
+                                    <td><% case m.level %><% when 1 %>멤버<% when 2 %>운영진<% end %></td>
+                                    <td><%= link_to m.name, member_path(m.id) %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="card-footer">
                     
@@ -42,11 +80,11 @@
                     <h4 class="card-title">이벤트 중에서</h4>
                 </div>
                 <div class="card-body">
-                    
+                    <div id="calendar"></div>
                 </div>
-                <div class="card-footer">
-                    
-                </div>
+                <script>
+                    $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json?search=<%= params[:keyword] %>' });
+                </script>
             </div>
         </div>
     </div>
@@ -58,9 +96,6 @@
                     <h4 class="card-title">과제 중에서</h4>
                 </div>
                 <div class="card-body">
-                    
-                </div>
-                <div class="card-footer">
                     
                 </div>
             </div>

@@ -36,7 +36,7 @@
 }
 
 
-.input-text {
+.input-text, .form-inputs input {
   display: block;
   margin: 0;
   padding: var(--inputPaddingV) var(--inputPaddingH);
@@ -52,15 +52,15 @@
   margin-bottom: .5rem;
 }
 
-.input-text:focus {
+.input-text:focus, .form-inputs input:focus {
   outline: none;
   box-shadow: .2rem .1rem 1.2rem var(--colorPrimary600);
 }
 
-.input-label {
+.input-label, .form-inputs label {
   display: block;
   position: absolute;
-  bottom: 80%;
+  top: 5rem;
   left: 1rem;
   color: #311B92;
   font-family: inherit;
@@ -79,13 +79,15 @@
     z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
 }
 
-.input-text:placeholder-shown + .input-label {
+.input-text:placeholder-shown + .input-label, .form-inputs input:placeholder-shown + label {
   visibility: hidden;
   z-index: -1;
 }
 
 .input-text:not(:placeholder-shown) + .input-label,
-.input-text:focus:not(:placeholder-shown) + .input-label {
+.input-text:focus:not(:placeholder-shown) + .input-label,
+.form-inputs input:not(:placeholder-shown) + label, 
+.form-inputs input:focus:not(:placeholder-shown) + label {
   visibility: visible;
   z-index: 1;
   opacity: 1;
@@ -96,4 +98,88 @@
     transform var(--inputTransitionDuration),
     visibility 0ms,
     z-index 0ms;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white !important;
+    background: #40E0D0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FF0080, #FF8C00, #40E0D0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FF0080, #FF8C00, #40E0D0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(36,36,36,.8);
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+	pointer-events: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+form.new_reply {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  & input[type=text] {
+      line-height: calc(var(--inputLineHeight)/3);
+      margin-bottom: 0;
+  }
+}
+
+.reply {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .4rem;
+  & .reply-body {
+    width: 100%;
+    & header {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }  
+}
+
+.fc-time {
+  display: none;
+}
+
+.fc-title {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.card-body {
+  position: relative;
+  min-height: 50vh;
 }

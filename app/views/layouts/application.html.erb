@@ -13,7 +13,7 @@
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag Ckeditor.cdn_url %>
 </head>
-<body>
+<body style="background: #ebecf1;">
 <div class="wrapper">
   <div class="sidebar" data-color="orange">
         <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="<%= @homework %>">
-                    <a href="<%= homework_path %>">
+                    <a href="<%= homework_status_path %>">
                         <i class="fas fa-sticky-note"></i>
                         <p>과제</p>
                     </a>
@@ -63,6 +63,14 @@
                         <p>사진</p>
                     </a>
                 </li>
+                <% if current_user.level == 2 then %>
+                <li class="<%= @admin %>">
+                    <a href="<%= admin_dashboard_path %>">
+                        <i class="far fa-user"></i>
+                        <p>운영진</p>
+                    </a>
+                </li>
+                <% end %>
             </ul>
         </div>
     </div>
@@ -156,7 +164,11 @@
 <% if !flash.empty? then %>
 <script>
     <% flash.keys.each do |f| %>
-    swal(<%= f.capitalize %>, <%= flash[f] %>, 'success');
+    <% if f == 'error' then %>
+    swal('<%= f.capitalize %>', '<%= flash[f] %>', 'error');
+    <% else %>
+    swal('<%= f.capitalize %>', '<%= flash[f] %>', 'success');
+    <% end %>
     <% end %>
 </script>
 <% end %>

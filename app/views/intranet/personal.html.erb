@@ -1,0 +1,40 @@
+<div class="panel-header panel-header-lg center-header">
+    <header><%= User.find(params[:id]).name %></header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-user">
+                <div class="image">
+                    <%= image_tag "background.jpg" %>
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                        <img class="avatar border-gray" src="http://placehold.it/300/300/fff?text=USER" alt="Member_<%= params[:id] %>_thumbnail">
+                        <h5 class="title"><%= User.find(params[:id]).name %></h5>
+                        <p class="description">
+                            <%= User.find(params[:id]).email %>
+                        </p>
+                    </div>
+                    <p class="description text-center">
+                        "Lamborghini Mercy <br>
+                        Your chick she so thirsty <br>
+                        I'm in that two seat Lambo"
+                    </p>
+                </div>
+                <hr>
+                <div class="button-container">
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-google-plus-g"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

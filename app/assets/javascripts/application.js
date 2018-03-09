@@ -18,3 +18,9 @@
 //= require perfect-scrollbar
 //= require_tree .
 //= stub login
+
+$(document).ready(function(){
+    $("label.fileTrigger").click(function(){
+        $(".inputfile").click();
+    });
+});

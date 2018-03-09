@@ -13,12 +13,14 @@
                     <div id="calendar"></div>
                 </div>
                 <div class="card-footer">
-                    <a href="" class="btn btn-primary btn-block">이벤트 등록</a>
+                    <% if current_user.level == 2 then %>
+                        <%= link_to "이벤트 등록", new_event_path, class: "btn btn-primary btn-block" %>
+                    <% end %>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $('#calendar').fullCalendar({ lang: 'ko' });
+    $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json' });
 </script>

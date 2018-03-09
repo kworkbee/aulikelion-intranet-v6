@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307042839) do
+ActiveRecord::Schema.define(version: 20180309013327) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -25,6 +25,36 @@ ActiveRecord::Schema.define(version: 20180307042839) do
     t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "url"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "homeworks", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.datetime "closing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_images_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "category"
     t.string   "title"
@@ -34,6 +64,26 @@ ActiveRecord::Schema.define(version: 20180307042839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_replies_on_post_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "homework_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "file"
+    t.index ["homework_id"], name: "index_submissions_on_homework_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,10 +108,23 @@ ActiveRecord::Schema.define(version: 20180307042839) do
     t.integer  "level",                  default: 1
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "homework_id"
+    t.integer  "post_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["homework_id"], name: "index_users_on_homework_id"
+    t.index ["post_id"], name: "index_users_on_post_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  end
+
+  create_table "views", force: :cascade do |t|
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["post_id"], name: "index_views_on_post_id"
+    t.index ["user_id"], name: "index_views_on_user_id"
   end
 
 end

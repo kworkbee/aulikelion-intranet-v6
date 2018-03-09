@@ -6,10 +6,16 @@
         <div class="col-12">
             <%= form_for @post, url: create_post_path do |form| %>
             <% if current_page?(nedit_path) %>
+                <% if current_user.level == 2 then %>
                 <%= form.hidden_field :category, value: "1" %>
+                <% else %>
+                    <% flash[:error] = "잘못된 접근입니다." %>
+                    <% redirect_to :back %>
+                <% end %>
             <% elsif current_page?(fedit_path) %>
                 <%= form.hidden_field :category, value: "2" %>
             <% end %>
+            <%= form.hidden_field :user_id, value: current_user.id %>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-category">
@@ -29,9 +35,9 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <%= form.text_field :title, class: 'title input-text', placeholder: "제목을 입력하세요", autofocus: "on" %>
+                    <%= form.text_field :title, class: 'title input-text', placeholder: "제목을 입력하세요", autofocus: "on", required: true %>
                     <%= form.label :title, "제목", class: "input-label" %>
-                    <%= form.cktext_area :content, cols: 400, ckeditor: { uiColor: '#F2F3F5', height: '60vh' } %>
+                    <%= form.cktext_area :content, cols: 400, ckeditor: { uiColor: '#F2F3F5', height: '60vh', toolbar: "mini" } %>
                 </div>
                 <div class="card-footer">
                     <%= form.submit "게시물 생성", class: "btn btn-primary" %>

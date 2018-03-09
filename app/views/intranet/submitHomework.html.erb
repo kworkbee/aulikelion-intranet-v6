@@ -1,0 +1,25 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>과제 제출</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <%= form_for @submission, url: submit_homework_path(params[:id]) do |f| %>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">Submit Homework</h5>
+                    <h4 class="card-title">과제 제출</h4>
+                </div>
+                <div class="card-body">
+                    <%= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.hidden_field :homework_id, value: params[:id] %>
+                    <%= f.file_field :file, required: true %>
+                </div>
+                <div class="card-footer">
+                    <%= f.submit "과제 제출", class: "btn btn-primary btn-block", "data-confirm": "제출하시겠습니까?" %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

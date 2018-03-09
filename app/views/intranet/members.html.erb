@@ -11,8 +11,8 @@
                 </div>
                 <div class="card-body">
                     <div class="author">
-                         <a href="#">
-                        <img class="avatar border-gray" src="http://placehold.it/300/300/fff?text=USER" alt="Member_<%= member.id %>_thumbnail">
+                        <a href="<%= member_path(member.id) %>">
+                            <img class="avatar border-gray" src="http://placehold.it/300/300/fff?text=USER" alt="Member_<%= member.id %>_thumbnail">
                             <h5 class="title"><%= member.name %></h5>
                         </a>
                         <p class="description">
