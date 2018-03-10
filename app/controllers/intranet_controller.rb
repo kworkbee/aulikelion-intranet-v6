@@ -1,6 +1,8 @@
 class IntranetController < ApplicationController
   before_action :authenticate_user!
-  before_action :checkAuth, only: [:newEvent, :editor]
+  before_action :checkAuth, only: [:newEvent]
+  
+  include ActionView::Helpers::UrlHelper
   
   def dashboard
     @dashboard = "active"
@@ -25,7 +27,7 @@ class IntranetController < ApplicationController
   def gallery
     @gallery = "active"
     @title = "Gallery"
-    @image = Image.all
+    @image = Image.all.order(created_at: :desc)
   end
   
   def events
@@ -39,6 +41,7 @@ class IntranetController < ApplicationController
   
   def createEvent
     @event = Event.new(save_events)
+    @event.end += 1.day
     if @event.save then
       @event.update(url: view_event_path(@event.id))
       flash[:created] = "생성되었습니다."
@@ -55,6 +58,16 @@ class IntranetController < ApplicationController
     if @event.destroy then
       flash[:removed] = "삭제되었습니다."
       redirect_to event_path
+    end
+  end
+  
+  def editEvent
+    @event = Event.find(params[:id])
+    if request.patch? then
+      if @event.update(start: params[:event][:start].to_datetime, end: params[:event][:end].to_datetime + 1.day, title: params[:event][:title], content: params[:event][:content]) then
+        flash[:updated] = "이벤트를 수정하였습니다."
+        redirect_to event_path
+      end
     end
   end
 
@@ -79,7 +92,7 @@ class IntranetController < ApplicationController
   def viewPost
     @post = Post.find(params[:id])
     @reply = Reply.new
-    @replies = Reply.all
+    @replies = Reply.all.order(created_at: :desc)
     if !@post.views.exists?(user_id: current_user.id) then
       @post.views.new(user_id: current_user.id).save
     end
@@ -120,6 +133,9 @@ class IntranetController < ApplicationController
   end
   
   def editor
+    if current_page?(nedit_path) then
+      checkAuth
+    end
     @post = Post.new
   end
   
@@ -163,11 +179,15 @@ class IntranetController < ApplicationController
   end
   
   def personal
+    @title = "Member Info"
+    @user = User.find(params[:id])
   end
   
   def getEventJSON
     if params.has_key?(:search) then
       @query = Event.where("title LIKE ?", "%#{params[:search]}%").or(Event.where("content LIKE ?", "%#{params[:search]}%"))
+    elsif params.has_key?(:recent) then
+      @query = Event.where(start: Time.now..1.month.from_now)
     else
       @query = Event.all
     end

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post '/intranet/events/save' => "intranet#createEvent", as: :create_event
   get '/intranet/events/data' => "intranet#getEventJSON", as: :event_json
   get '/intranet/events/:id' => "intranet#viewEvent", as: :view_event
+  get '/intranet/events/:id/edit' => "intranet#editEvent", as: :edit_event
+  patch '/intranet/events/:id/edit' => "intranet#editEvent", as: :update_event
   delete '/intranet/events/:id/remove' => "intranet#removeEvent", as: :remove_event
   get '/intranet/homework', as: :homework_status
   get '/intranet/homework/:id/submission' => "intranet#submitHomework", as: :submission

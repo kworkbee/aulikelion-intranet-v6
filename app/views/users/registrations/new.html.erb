@@ -8,6 +8,11 @@
     <%= f.input :name, required: true, placeholder: "이름" %>
     <%= f.input :password, required: true, hint: ("최소 #{@minimum_password_length}글자 이상" if @minimum_password_length), placeholder: "패스워드" %>
     <%= f.input :password_confirmation, required: true, placeholder: "패스워드 재확인" %>
+    <hr>
+    <%= f.input :introduction, required: true, placeholder: "간단한 자기소개" %>
+    <div class="filebox">
+        <%= f.input :thumb, class: "inputfile", hint: "프로필 사진 (필수)", required: true %>
+    </div>
   </div>
   <div class="shared">
   <%= render "users/shared/links" %>

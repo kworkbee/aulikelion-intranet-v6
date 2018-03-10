@@ -3,19 +3,22 @@
     <%= r.hidden_field :user_id, value: current_user.id %>
     <%= r.hidden_field :post_id, value: @post.id %>
     <%= r.text_field :content, required: true, class: "input-text", placeholder: "댓글 입력" %>
-    <%= r.submit "등록", class: "btn btn-primary" %>
+    <%= r.submit "등록", class: "btn btn-info" %>
 <% end %>
+<hr>
 <div class="replies">
     <% @replies.each do |reply| %>
     <div class="reply">
         <div class="reply-body">
             <header>
-                <span class="name"><%= reply.user.name %></span> | <span class="time"><%= reply.created_at.strftime("%m/%d") %></span>
+                <strong><%= link_to reply.user.name, member_path(reply.user.id), class: "name" %></strong> | <span class="time"><%= reply.created_at.strftime("%m/%d %H:%M") %></span>
             </header>
             <p><%= reply.content %></p>
         </div>
         <div class="reply-control">
-            <%= link_to "삭제", remove_reply_path(reply.id), class: "btn btn-primary", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까?" %>
+            <% if reply.user.id == current_user.id then %>
+                <%= link_to "삭제", remove_reply_path(reply.id), class: "btn btn-sm btn-danger", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까?" %>
+            <% end %>
         </div>
     </div>
     <% end %>

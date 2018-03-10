@@ -7,6 +7,12 @@
             <div class="card">
                 <div class="card-header">FREEBOARD</div>
                 <div class="card-body">
+                    <% if @post.count == 0 then %>
+                    <div class="no-data">
+                        <i class="fas fa-exclamation"></i>
+                        <h4>게시된 글이 없습니다</h4>
+                    </div>
+                    <% else %>
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
@@ -24,13 +30,14 @@
                                     <td><%= p.id %></td>
                                     <td><%= link_to p.title, view_path(p.id) %></td>
                                     <td><%= link_to p.user.name, member_path(p.user.id) %></td>
-                                    <td><%= p.created_at.strftime("%m/%d") %></td>
+                                    <td><%= p.created_at.strftime("%m/%d %H:%M") %></td>
                                     <td><%= p.views.count %></td>
                                 </tr>
                                 <% end %>
                             </tbody>
                         </table>
                     </div>
+                    <% end %>
                 </div>
                 <div class="card-footer">
                     <%= link_to "게시물 작성", fedit_path, class: "btn btn-primary btn-block" %>

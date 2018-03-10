@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :replies
   has_many :images
   belongs_to :view
+  has_attached_file :thumb
+  validates_attachment :thumb, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 end

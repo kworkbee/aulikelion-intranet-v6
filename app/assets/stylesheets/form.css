@@ -33,6 +33,9 @@
   --inputTransitionDuration: var(--transitionDuration);
   --inputTransitionTF: var(--transitionTF); }
 
+input {
+  font-weight: 100 !important; }
+
 .input-text, .form-inputs input {
   display: block;
   margin: 0;

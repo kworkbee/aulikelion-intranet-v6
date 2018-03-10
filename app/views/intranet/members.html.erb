@@ -3,8 +3,8 @@
 </div>
 <div class="content">
     <div class="row">
+        <% @members.each do |member| %>
         <div class="col-md-6 col-lg-4">
-           <% @members.each do |member| %>
             <div class="card card-user">
                 <div class="image">
                     <%= image_tag "background.jpg" %>
@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="author">
                         <a href="<%= member_path(member.id) %>">
-                            <img class="avatar border-gray" src="http://placehold.it/300/300/fff?text=USER" alt="Member_<%= member.id %>_thumbnail">
+                            <%= image_tag member.thumb, class:"avatar border-gray" %>
                             <h5 class="title"><%= member.name %></h5>
                         </a>
                         <p class="description">
@@ -20,9 +20,7 @@
                         </p>
                     </div>
                     <p class="description text-center">
-                        "Lamborghini Mercy <br>
-                        Your chick she so thirsty <br>
-                        I'm in that two seat Lambo"
+                        <%= member.introduction %>
                     </p>
                 </div>
                 <hr>
@@ -37,8 +35,8 @@
                         <i class="fab fa-google-plus-g"></i>
                     </button>
                 </div>
-            </div>
-            <% end %> 
+            </div> 
         </div>
+        <% end %>
     </div>
 </div>

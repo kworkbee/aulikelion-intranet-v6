@@ -10,13 +10,14 @@
                     <h4 class="card-title"><%= @event.title %></h4>
                 </div>
                 <div class="card-body">
-                    <h5 style="display: inline;"><%= @event.start.strftime("%Y-%m-%d") %></h5>부터 <h5 style="display: inline;"><%= @event.end.strftime("%Y-%m-%d") %></h5>까지
+                    <h5 style="display: inline;"><%= @event.start.strftime("%Y-%m-%d") %></h5>부터 <h5 style="display: inline;"><%= (@event.end - 1.day).strftime("%Y-%m-%d") %></h5>까지
                     <hr>
                     <%= @event.content.html_safe %>
                 </div>
                 <div class="card-footer">
                     <% if current_user.level == 2 then %>
-                    <%= link_to "이벤트 삭제", remove_event_path(@event.id), class: "btn btn-primary btn-danger", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까? 삭제된 데이터는 복구가 불가합니다." %>
+                    <%= link_to "이벤트 수정", edit_event_path(@event.id), class: "btn btn-warning" %>
+                    <%= link_to "이벤트 삭제", remove_event_path(@event.id), class: "btn btn-danger", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까? 삭제된 데이터는 복구가 불가합니다." %>
                     <% end %>
                 </div>
             </div>

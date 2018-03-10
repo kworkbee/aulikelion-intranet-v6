@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-category">EVENTS</h5>
-                    <h4 class="card-title">이벤트</h4>
+                    <h4 class="card-title" style="font-weight: 600">이벤트</h4>
                 </div>
                 <div class="card-body">
                     <div id="calendar"></div>
@@ -22,5 +22,5 @@
     </div>
 </div>
 <script>
-    $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json' });
+    $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json', maxTime: '24:00:00' });
 </script>

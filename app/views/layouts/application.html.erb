@@ -4,7 +4,7 @@
   <%= csrf_meta_tags %>
   <title>LIKELION :: 아주대학교 인트라넷</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--     Fonts and icons     -->
   <link href="https://cdn.jsdelivr.net/font-kopub/1.0/kopubdotum.css" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
@@ -86,7 +86,7 @@
                         <span class="navbar-toggler-bar bar3"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" href="#pablo"><%= @title %></a>
+                <a class="navbar-brand" href=""><%= @title %></a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -104,7 +104,7 @@
                 </form>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i>
                             <p>
                                 <span class="d-lg-none d-md-block">계정</span>
@@ -131,30 +131,30 @@
     <%= yield %>
     
     <footer class="footer">
-    <div class="container-fluid">
-        <nav>
-            <ul>
-                <li>
-                    <a href="http://likelion.org">
-                        LIKELION
-                    </a>
-                </li>
-                <li>
-                    <a href="http://aulikelion.github.io">
-                        아주대학교 멋쟁이사자처럼
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="copyright">
-            &copy;
-            <script>
-                document.write(new Date().getFullYear())
-            </script>, Organization by
-            <a href="http://www.likelion.org" target="_blank">LIKELION</a>. Coded by J.W.Jeon (4th).
+        <div class="container-fluid">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="http://likelion.org">
+                            LIKELION
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://aulikelion.github.io">
+                            아주대학교 멋쟁이사자처럼
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Organization by
+                <a href="http://www.likelion.org" target="_blank">LIKELION</a>. Coded by J.W.Jeon (4th).
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>

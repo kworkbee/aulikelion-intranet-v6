@@ -1,20 +1,20 @@
 <div class="panel-header panel-header-lg center-header">
-    <header>이벤트 등록</header>
+    <header>이벤트 수정</header>
 </div>
 <div class="content">
     <div class="row">
         <div class="col-12">
-            <%= form_for @event, url: create_event_path do |f| %>
+            <%= form_for @event, url: update_event_path do |f| %>
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-category">New Event</h5>
-                    <h4 class="card-title" style="font-weight: 600">이벤트 등록</h4>
+                    <h5 class="card-category">Update Event</h5>
+                    <h4 class="card-title" style="font-weight: 600">이벤트 수정</h4>
                 </div>
                 <div class="card-body" style="position: relative;">
                     <%= f.text_field :title, required: true, class: "title input-text", placeholder: "이벤트명" %>
                     <%= f.label :title, "이벤트명", class: "input-label" %>
                     <%= f.datetime_field :start, required: true, class: "title datepicker input-text", placeholder: "시작일" %>
-                    <%= f.datetime_field :end, required: true, class: "title datepicker input-text", placeholder: "종료일, 일일 이벤트는 시작일=종료일" %>
+                    <%= f.datetime_field :end, value: (@event.end.to_datetime - 1.day).strftime("%Y-%m-%dT00:00:00"), required: true, class: "title datepicker input-text", placeholder: "종료일, 일일 이벤트는 시작일=종료일" %>
                     <%= f.cktext_area :content, cols: 400, ckeditor: { uiColor: '#F2F3F5', height: '60vh', toolbar: "mini" } %>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/legacy.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"></script>
