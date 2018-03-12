@@ -16,19 +16,19 @@ class IntranetController < ApplicationController
   def notice
     @notice = "active"
     @title = "Notice"
-    @post = Post.where(category: 1).order(created_at: :desc)
+    @post = Post.where(category: 1).order(created_at: :desc).page params[:page]
   end
 
   def freeboard
     @freeboard = "active"
     @title = "Freeboard"
-    @post = Post.where(category: 2).order(created_at: :desc)
+    @post = Post.where(category: 2).order(created_at: :desc).page params[:page]
   end
   
   def viewPost
     @post = Post.find(params[:id])
     @reply = Reply.new
-    @replies = @post.replies.order(created_at: :desc)
+    @replies = @post.replies.order(created_at: :desc).page params[:page]
     if !@post.views.exists?(user_id: current_user.id) then
       @post.views.new(user_id: current_user.id).save
     end
@@ -96,7 +96,7 @@ class IntranetController < ApplicationController
   def gallery
     @gallery = "active"
     @title = "Gallery"
-    @image = Image.all.order(created_at: :desc)
+    @image = Image.all.order(created_at: :desc).page params[:page]
   end
   
   def imgUpload

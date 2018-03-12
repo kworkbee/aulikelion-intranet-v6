@@ -40,6 +40,7 @@
                     <% end %>
                 </div>
                 <div class="card-footer">
+                    <%= paginate @post %>
                     <% if current_user.level == 2 then %>
                         <%= link_to "게시물 작성", nedit_path, class: "btn btn-primary btn-block" %>
                     <% end %>

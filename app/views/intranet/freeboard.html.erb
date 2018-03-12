@@ -40,6 +40,7 @@
                     <% end %>
                 </div>
                 <div class="card-footer">
+                    <%= paginate @post %>
                     <%= link_to "게시물 작성", fedit_path, class: "btn btn-primary btn-block" %>
                 </div>
             </div>

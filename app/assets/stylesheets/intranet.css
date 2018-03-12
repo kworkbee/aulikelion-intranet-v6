@@ -63,4 +63,18 @@ article.pic {
   padding: 1rem;
   text-align: center; }
 
+nav.pagination {
+  justify-content: center;
+  margin-bottom: 2rem; }
+  nav.pagination span {
+    list-style-type: none;
+    display: inline-block;
+    border-right: 1px solid #d7dadb;
+    padding: 1.1em 1.6em; }
+    nav.pagination span a {
+      text-decoration: none; }
+  nav.pagination .current {
+    background-color: #fa4248;
+    color: white; }
+
 /*# sourceMappingURL=intranet.css.map */

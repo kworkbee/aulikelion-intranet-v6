@@ -34,7 +34,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'mini_magick'
 gem 'puma'
-gem 'redis'
+gem 'kaminari'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

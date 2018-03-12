@@ -28,6 +28,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <%= paginate @image %>
                     <%= link_to "사진 업로드", new_image_path, class: "btn btn-primary btn-block" %>
                 </div>
             </div>
