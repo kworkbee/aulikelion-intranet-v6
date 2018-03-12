@@ -26,10 +26,10 @@
                 <div class="card-footer">
                    <% if h.closing < Time.now then %>
                    <%= link_to "과제 마감", nil, class: "btn btn-block btn-danger", disabled: true %>
-                   <% elsif h.submissions.where(user_id: current_user.id).count != 1 %>
+                   <% elsif h.submissions.where(user_id: current_user.id).count < 1 %>
                    <%= link_to "과제 제출", submission_path(h.id), class: "btn btn-block btn-primary" %>
                    <% else %>
-                   <a disabled class="btn btn-block btn-info">과제 제출 완료</a>
+                   <%= link_to "과제 수정", submission_path(h.id), class: "btn btn-block btn-info" %>
                    <% end %>
                 </div>
             </div>

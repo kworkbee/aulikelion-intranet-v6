@@ -1,16 +1,18 @@
-<h2>Resend confirmation instructions</h2>
+<section class="container">
 
-<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: user_confirmation_path(resource_name)) do |f| %>
   <%= f.error_notification %>
   <%= f.full_error :confirmation_token %>
-
+  <h2><i class="fas fa-user"></i> 인증 이메일 재발송</h2>
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :email, required: true, autofocus: true, placeholder: "이메일" %>
   </div>
-
+  <div class="shared">
+  <%= render "users/shared/links" %>
+  </div>
   <div class="form-actions">
-    <%= f.button :submit, "Resend confirmation instructions" %>
+    <%= f.button :submit, "재발송" %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+</section>

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/intranet/homework', as: :homework_status
   get '/intranet/homework/:id/submission' => "intranet#submitHomework", as: :submission
   post '/intranet/homework/:id/submission' => "intranet#createSubmission", as: :submit_homework
+  patch '/intranet/homework/submission/:id/edit' => "intranet#editSubmission", as: :edit_submission
   get '/intranet/search', as: :search
   get '/intranet/notice/write' => 'intranet#editor', as: :nedit
   get '/intranet/freeboard/write' => 'intranet#editor', as: :fedit
@@ -41,5 +42,7 @@ Rails.application.routes.draw do
   post '/intranet/post/view/:id/reply/create' => "intranet#saveReply", as: :replies
   delete '/intranet/post/view/:id/reply/remove' => "intranet#removeReply", as: :remove_reply
   delete '/intranet/post/remove/:id' => "intranet#removePost", as: :remove_post
-  
+  delete '/intranet/admin/user/:id' => "admin#removeUser", as: :remove_user
+  patch '/intranet/admin/user/:id/accept' => 'admin#acceptUser', as: :accept_user
+  patch '/intranet/admin/user/:id/password/reset' => "admin#resetUserPW", as: :reset_password
 end

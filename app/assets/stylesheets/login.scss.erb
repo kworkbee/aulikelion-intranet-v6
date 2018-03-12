@@ -199,12 +199,17 @@ body {
     }
 }
 
-span.error {
+span.error, .error_notification {
     display: block;
     margin: .5rem auto;
     background: red;
     text-align: center;
     color: white;
-    width: 50%;
+    width: 60%;
+    font-weight: 100;
     padding: .5rem 0;
+}
+
+.error_notification {
+    width: 80%;
 }

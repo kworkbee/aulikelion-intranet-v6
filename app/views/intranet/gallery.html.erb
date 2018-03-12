@@ -9,6 +9,12 @@
                 <div class="card-body">
                     <div class="pics">
                         <div class="row" style="margin: 0 1rem;">
+                            <% if @image.count == 0 then %>
+                            <div class="no-data col-lg-12">
+                                <i class="fas fa-exclamation"></i>
+                                <h4>게시된 사진이 없습니다</h4>
+                            </div>
+                            <% else %>
                             <% @image.each do |image| %>
                             <article class="pic col-md-4 col-lg-6">
                                 <%= image_tag image.file %>
@@ -16,6 +22,7 @@
                                 <h5 class="title"><%= image.title %></h5>
                                 <h6><%= link_to image.user.name, member_path(image.user.id) %></h6>
                             </article>
+                            <% end %>
                             <% end %>
                         </div>
                     </div>

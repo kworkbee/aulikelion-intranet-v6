@@ -16,9 +16,9 @@
 //= require moment 
 //= require fullcalendar
 //= require_tree .
-//= stub login
 
 $(document).ready(function(){
+    $("body").addClass("loaded").addClass("scrollable");
     $("label.fileTrigger").click(function(){
         $(".inputfile").click();
     });

@@ -6,7 +6,7 @@
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true, placeholder: "이메일" %>
     <%= f.input :name, required: true, placeholder: "이름" %>
-    <%= f.input :password, required: true, hint: ("최소 #{@minimum_password_length}글자 이상" if @minimum_password_length), placeholder: "패스워드" %>
+    <%= f.input :password, required: true, placeholder: ("패스워드 (#{@minimum_password_length}글자 이상)" if @minimum_password_length) %>
     <%= f.input :password_confirmation, required: true, placeholder: "패스워드 재확인" %>
     <hr>
     <%= f.input :introduction, required: true, placeholder: "간단한 자기소개" %>

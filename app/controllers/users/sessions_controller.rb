@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  after_filter :after_login, :only => :create
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -19,6 +20,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # protected
+  
+  def after_login
+    current_user.logs.new.save
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

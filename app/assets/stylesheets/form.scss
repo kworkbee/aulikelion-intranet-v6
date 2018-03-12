@@ -113,17 +113,25 @@ input {
 }
 
 .inputfile + label {
-    width: 50%;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    font-weight: 600;
+    font-size: 1.7rem !important;
     text-align: center;
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white !important;
-    background: #40E0D0;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FF0080, #FF8C00, #40E0D0);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FF0080, #FF8C00, #40E0D0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    display: inline-block;
-    box-shadow: 0 0 10px rgba(36,36,36,.8);
+    color: dimgrey !important;
+    margin: 0 2rem;
+    box-shadow: 0 0 10px rgba(36, 36, 36, .1);
+    transition: all .25s ease-in;
+    & span {
+      display: inline-block;
+      width: 100%;
+    }
+    &:hover {
+      border: 3px solid darkgrey;
+    }
 }
 
 .inputfile:focus + label,
@@ -185,4 +193,19 @@ form.new_reply {
 .card-body {
   position: relative;
   min-height: 50vh;
+}
+
+.selected {
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(36,36,36,.5);
+  background: darkorange;
+}
+
+.selected span {
+  color: white;
+}
+
+.selected path {
+  fill: #fff !important;
 }
