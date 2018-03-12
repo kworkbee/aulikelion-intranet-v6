@@ -16,32 +16,3 @@
  *= require_self
  *= stub login
  */
- 
-* {
- font-family: "Montserrat", "Helvetica Neue", "KoPub Dotum", sans-serif;
-}
-
-body {
-    overflow: hidden;
-}
-
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000000;
-    background: white;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-body.loaded .loader {
-    display: none;
-}
-
-body.scrollable {
-    overflow: scroll;
-}

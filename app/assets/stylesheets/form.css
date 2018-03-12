@@ -146,17 +146,6 @@ form.new_reply {
       font-weight: 500;
       font-size: 1rem; }
 
-.fc-time {
-  display: none; }
-
-.fc-title {
-  font-size: 1.2rem;
-  color: white; }
-
-.card-body {
-  position: relative;
-  min-height: 50vh; }
-
 .selected {
   border: 3px solid white;
   border-radius: 10px;

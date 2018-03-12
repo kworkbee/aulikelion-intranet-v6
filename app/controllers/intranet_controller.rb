@@ -9,6 +9,7 @@ class IntranetController < ApplicationController
     @dashboard = "active"
     @title = "Dashboard"
     @recentPost = Post.where(created_at: 1.week.ago..Time.now).order(created_at: :desc)
+    @newHomeworks = Homework.where(created_at: 1.week.ago..Time.now).count
     @nonCompletedHomeworks = Homework.all.count - current_user.submissions.count
   end
 

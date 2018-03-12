@@ -1,6 +1,30 @@
-
+* {
+ font-family: "Montserrat", "Helvetica Neue", "KoPub Dotum", sans-serif;
+}
 body {
+    overflow: hidden;
     font-size: 18px;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000000;
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.loaded .loader {
+    display: none;
+}
+
+body.scrollable {
+    overflow: scroll;
 }
 
 @media screen and (max-device-width: 480px) {
@@ -79,6 +103,20 @@ table.homework_status th:last-child {
 
 .no-data h4 {
     font-weight: 100;
+}
+
+.fc-time {
+  display: none;
+}
+
+.fc-title {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.card-body {
+  position: relative;
+  min-height: 50vh;
 }
 
 // Dashboard

@@ -8,17 +8,6 @@
                 <div class="card-header">
                     <h5 class="card-category">EVENTS</h5>
                     <h4 class="card-title" style="font-weight: 600;">예정 이벤트</h4>
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body" style="position: relative;">
                   <div id="calendar"></div>
@@ -38,31 +27,12 @@
                 <div class="card-header">
                     <h5 class="card-category">HOMEWORKS</h5>
                     <h4 class="card-title" style="font-weight: 600;">과제</h4>
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                            <i class="now-ui-icons loader_gear"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <a class="dropdown-item text-danger" href="#">Remove Data</a>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12 col-lg-6">
-                      <span class="subtitle">신규과제</span><br>
-                      <span class="big">
-                        <% nCount = 0 %>
-                        <% Homework.all.each do |h| %>
-                          <% if h.submissions.where(user_id: current_user.id).count == 0 %>
-                            <% nCount += 1 %>
-                          <% end %>
-                        <% end %>
-                        <%= nCount %>
-                      </span>건
+                      <span class="subtitle">신규과제(1주 내)</span><br>
+                      <span class="big"><%= @newHomeworks %></span>건
                     </div>
                     <div class="col-md-12 col-lg-6">
                       <span class="subtitle">미완료과제</span><br>
