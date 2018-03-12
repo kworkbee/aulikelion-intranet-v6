@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310124238) do
+ActiveRecord::Schema.define(version: 20180310232053) do
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_chatrooms_on_user_id"
+  end
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -55,6 +63,16 @@ ActiveRecord::Schema.define(version: 20180310124238) do
     t.index ["user_id"], name: "index_images_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "chatroom_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "category"
     t.string   "title"
@@ -79,9 +97,13 @@ ActiveRecord::Schema.define(version: 20180310124238) do
   create_table "submissions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "homework_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.text     "file"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
     t.index ["homework_id"], name: "index_submissions_on_homework_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end

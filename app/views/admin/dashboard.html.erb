@@ -29,6 +29,7 @@
                                     <td><%= h.closing.strftime("%m/%d") %></td>
                                     <td><%= h.submissions.count %>/<%= User.all.count %></td>
                                     <td>
+                                        <%= link_to "상세", submissions_status_path(h.id), class: "btn btn-sm btn-info" %>
                                         <%= link_to "수정", edit_homework_path(h.id), class: "btn btn-warning btn-sm" %>
                                         <%= link_to "삭제", homework_path(h.id), class: "btn btn-danger btn-sm", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까? 삭제 시 복구가 불가능합니다." %>
                                     </td>

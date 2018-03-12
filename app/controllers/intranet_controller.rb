@@ -10,6 +10,7 @@ class IntranetController < ApplicationController
     Post.all.each do |post|
       @recentPost = post.views.where.not(user_id: 1)
     end
+    @nonCompletedHomeworks = Homework.all.count - current_user.submissions.count
   end
 
   def notice
@@ -171,6 +172,8 @@ class IntranetController < ApplicationController
     @fromPost = Post.where("title LIKE ?", "%#{params[:keyword]}%").or(Post.where("content LIKE ?", "%#{params[:keyword]}%"))
     @fromMembers = User.where("name LIKE ?", "%#{params[:keyword]}%")
     @fromEvents = Event.where("title LIKE ?", "%#{params[:keyword]}%").or(Event.where("content LIKE ?", "%#{params[:keyword]}%"))
+    @pictures = Image.where("title LIKE ?", "%#{params[:keyword]}%")
+    @fromHomeworks = Homework.where("title LIKE ?", "%#{params[:keyword]}%").or(Homework.where("content LIKE ?", "%#{params[:keyword]}%"))
   end
   
   def members

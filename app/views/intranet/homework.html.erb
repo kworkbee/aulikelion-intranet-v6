@@ -14,7 +14,7 @@
         </div>
         <% else %>
         <% @homeworks.each do |h| %>
-        <div class="col-md-4 col-lg-12">
+        <div class="col-xs-3 col-sm-6">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-category">과제 <%= h.id %> | <strong>마감일 <%= h.closing.strftime("%m/%d") %></strong></h5>
@@ -24,7 +24,9 @@
                     <%= h.content.html_safe %>
                 </div>
                 <div class="card-footer">
-                   <% unless h.submissions.where(user_id: current_user.id).count == 1 %>
+                   <% if h.closing < Time.now then %>
+                   <%= link_to "과제 마감", nil, class: "btn btn-block btn-danger", disabled: true %>
+                   <% elsif h.submissions.where(user_id: current_user.id).count != 1 %>
                    <%= link_to "과제 제출", submission_path(h.id), class: "btn btn-block btn-primary" %>
                    <% else %>
                    <a disabled class="btn btn-block btn-info">과제 제출 완료</a>

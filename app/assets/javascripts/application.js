@@ -15,7 +15,6 @@
 //= require Chart.min
 //= require moment 
 //= require fullcalendar
-//= require perfect-scrollbar
 //= require_tree .
 //= stub login
 
@@ -23,4 +22,8 @@ $(document).ready(function(){
     $("label.fileTrigger").click(function(){
         $(".inputfile").click();
     });
+});
+
+$(".navbar-toggler").click(function(){
+    $("html").toggleClass("nav-open");
 });

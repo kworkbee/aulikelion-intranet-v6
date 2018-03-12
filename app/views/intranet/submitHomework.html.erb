@@ -14,6 +14,7 @@
                     <%= f.hidden_field :user_id, value: current_user.id %>
                     <%= f.hidden_field :homework_id, value: params[:id] %>
                     <%= f.file_field :file, required: true %>
+                    <%= f.label :file, "압축 파일만 가능합니다. (zip, tar, rar, gz 등)" %>
                 </div>
                 <div class="card-footer">
                     <%= f.submit "과제 제출", class: "btn btn-primary btn-block", "data-confirm": "제출하시겠습니까?" %>

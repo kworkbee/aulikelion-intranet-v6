@@ -3,13 +3,17 @@ class AdminController < ApplicationController
   before_action :checkAuth
   
   def dashboard
-    @homeworks = Homework.all
+    @homeworks = Homework.all.order(created_at: :desc)
   end
 
   def posts
   end
 
   def homeworks
+  end
+  
+  def homework_status
+    @users = User.all
   end
 
   def members

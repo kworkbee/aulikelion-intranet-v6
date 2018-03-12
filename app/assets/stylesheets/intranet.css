@@ -1,5 +1,61 @@
+body {
+  font-size: 18px; }
+
+@media screen and (max-device-width: 480px) {
+  body {
+    font-size: 10px; } }
+@media screen and (max-device-width: 800px) {
+  body {
+    font-size: 12px; } }
+@media screen and (max-device-width: 960px) {
+  body {
+    font-size: 14px; } }
+@media screen and (max-device-width: 1280px) {
+  body {
+    font-size: 16px; } }
+@media screen and (min-device-width: 1281px) {
+  body {
+    font-size: 18px; } }
+.center-header {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.center-header header {
+  font-weight: 100;
+  font-size: 4rem;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6); }
+
+table.table th:first-child, table.table th:last-child {
+  width: 10%; }
+
+table.table th:nth-child(2) {
+  width: 50%; }
+
+table.table th:nth-child(3), table.table th:nth-child(4) {
+  width: 15%; }
+
+table.homework_status th:not(:last-child) {
+  width: 15%; }
+
+table.homework_status th:last-child {
+  width: 55%; }
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.no-data i {
+  font-size: 5vw; }
+
+.no-data h4 {
+  font-weight: 100; }
+
 span.big {
-  font-size: 10vw;
+  font-size: 15vh;
   text-shadow: 0 0 10px rgba(36, 36, 36, 0.5); }
 
 article.pic {

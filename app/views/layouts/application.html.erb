@@ -4,7 +4,7 @@
   <%= csrf_meta_tags %>
   <title>LIKELION :: 아주대학교 인트라넷</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <!--     Fonts and icons     -->
   <link href="https://cdn.jsdelivr.net/font-kopub/1.0/kopubdotum.css" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
@@ -15,13 +15,12 @@
 </head>
 <body style="background: #ebecf1;">
 <div class="wrapper">
-  <div class="sidebar" data-color="orange">
-        <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
+  <div class="sidebar" data-color="<%= ['blue', 'orange', 'red'].sample %>">
         <div class="logo">
             <a href="http://aulikelion.github.io" class="simple-text logo-mini">
                 AU
             </a>
-            <a href="http://www.likelion.org" class="simple-text logo-normal">
+            <a href="/" class="simple-text logo-normal">
                 <%= image_tag "https://d2hmp4n7p97ldw.cloudfront.net/assets/logo/likelion-white-a930fbcdf3042a50ba882ece9c02f43536971297a8e143e212d9b92d653bfa44.png", style: "height: 20px" %>
             </a>
         </div>

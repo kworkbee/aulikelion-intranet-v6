@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   }
   
   resources :homeworks
+  resources :chatrooms, only: [:new, :create, :show, :index]
   get '/intranet/admin/dashboard' => "admin#dashboard", as: :admin_dashboard
+  get '/intranet/admin/homework/:id/status' => "admin#homework_status", as: :submissions_status
   get '/intranet/members'
   get '/intranet/members/:id' => "intranet#personal", as: :member
   get '/intranet/dashboard'

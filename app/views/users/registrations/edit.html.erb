@@ -8,10 +8,15 @@
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p><%= resource.unconfirmed_email %> 이메일 인증이 완료되지 않았습니다.</p>
     <% end %>
-
-    <%= f.input :password, autocomplete: "off", hint: "변경하지 않으려면 빈칸으로 두세요.", required: false, placeholder: "변경할 패스워드" %>
-    <%= f.input :password_confirmation, required: false, placeholder: "패스워드 재확인"   %>
+    
+    <%= f.input :password, autocomplete: "off", required: false, placeholder: "변경할 패스워드" %>
+    <%= f.input :password_confirmation, required: false, placeholder: "패스워드 재확인", hint: "변경하지 않으려면 빈칸으로 두세요."   %>
     <%= f.input :current_password, hint: "정보 변경을 위해 비밀번호 입력이 필요합니다.", required: true, placeholder: "현재 패스워드" %>
+    <hr>
+    <%= f.input :introduction, required: true, placeholder: "간단한 자기소개" %>
+    <div class="filebox">
+        <%= f.input :thumb, class: "inputfile", hint: "프로필 사진 (필수)" %>
+    </div>
   </div>
  
   <div class="shared">

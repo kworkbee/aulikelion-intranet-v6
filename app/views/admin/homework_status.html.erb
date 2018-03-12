@@ -1,0 +1,60 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>과제 제출 현황</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category"><%= params[:id] %>번 과제</h5>
+                    <h4 class="card-title" style="font-weight: 600">과제 제출 현황</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table homework_status">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>회원명</th>
+                                    <th>제출상태</th>
+                                    <th>제출일</th>
+                                    <th>제출파일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @users.each do |user| %>
+                                <tr>
+                                    <td><%= link_to user.name, member_path(user.id) %></td>
+                                    <td>
+                                        <% if user.submissions.exists?(homework_id: params[:id]) then %>
+                                        제출
+                                        <% else %>
+                                        미제출
+                                        <% end %>
+                                    </td>
+                                    <td>
+                                        <% if user.submissions.exists?(homework_id: params[:id]) then %>
+                                            <%= user.submissions.where(homework_id: params[:id]).first.created_at.strftime("%m/%d %H:%M") %>
+                                        <% else %>
+                                        -
+                                        <% end %>
+                                    </td>
+                                    <td>
+                                        <% if user.submissions.exists?(homework_id: params[:id]) then %>
+                                            <%= link_to "다운로드", user.submissions.where(homework_id: params[:id]).first.file.url, download: true %>
+                                        <% else %>
+                                        -
+                                        <% end %>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

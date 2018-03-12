@@ -28,7 +28,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     width: 50%;
-    min-height: 400px;
+    min-height: 22rem;
     background: white;
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 15px 1px rgba(39, 39, 39, .8);
@@ -45,12 +45,12 @@ body {
         border-radius: 5px 0 0 5px;
         padding: 1rem;
         & h1 {
-            font-size: 3vh;
+            font-size: 2.55vh;
         }
         & .likelion {
             background: url('<%= image_path "likelion.png" %>') no-repeat center center/contain;
             width: 100%;
-            height: 100px;
+            height: 15vh;
             text-indent: -9999px;
         }
         & footer {
@@ -76,7 +76,7 @@ body {
         position: relative;
         & h2 {
             text-align: center;
-            font-size: 4vh;
+            font-size: 3vh;
             font-weight: 100;
             margin: 2rem 0 0 0;
         }
@@ -132,25 +132,25 @@ body {
     }
 }
 
-@media (min-width: 1281px) {
+@media (min-device-width: 1281px) {
     body {
         font-size: 20px;
     }
 }
 
-@media (max-width: 1280px) {
+@media (max-device-width: 1280px) {
     body {
         font-size: 18px;
     }
 }
 
-@media (min-width: 960px) {
+@media (min-device-width: 960px) {
     .valign-wrapper {
-        min-width: 80%;
+        width: 80%;
     }
 }
 
-@media (max-width: 960px) {
+@media (max-device-width: 960px) {
     body {
         font-size: 16px;
     }
@@ -160,7 +160,19 @@ body {
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 960px) {
+    .valign-wrapper {
+        flex-direction: column;
+        & header, .container {
+            width: 100%;
+        }
+        & header {
+            height: 40vh;
+        }
+    }
+}
+
+@media (max-device-width: 800px) {
     body {
         font-size: 14px;
     }
@@ -170,7 +182,7 @@ body {
         flex-direction: column;
         & header {
             width: 100%;
-            min-height: 17rem;
+            min-height: 13rem;
             border-radius: 5px 5px 0 0;
         }
         
@@ -181,8 +193,18 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-device-width: 480px) {
     body {
         font-size: 12px;
     }
+}
+
+span.error {
+    display: block;
+    margin: .5rem auto;
+    background: red;
+    text-align: center;
+    color: white;
+    width: 50%;
+    padding: .5rem 0;
 }
