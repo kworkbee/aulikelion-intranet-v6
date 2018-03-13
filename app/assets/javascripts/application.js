@@ -27,3 +27,7 @@ $(document).ready(function(){
 $(".navbar-toggler").click(function(){
     $("html").toggleClass("nav-open");
 });
+
+$("form.has-file").submit(function(){
+    $("body").removeClass("loaded");
+});

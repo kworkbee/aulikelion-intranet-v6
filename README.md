@@ -12,6 +12,10 @@ Paperclip.options[:image_magick_path] = "/opt/ImageMagick/bin"
 Paperclip.options[:command_path] = "/opt/ImageMagick/bin"
 ```
 
+!! Rails Version `5.0.6` | Ruby Version `2.3.4p0`
+
+!! 운영진 권한 : User 테이블 `level 필드 값 2`로 설정
+
 ---
 
 Copyright 2018 AUlikeLion 6th, Coded by J.W.Jeon, 4th Member of AUlikeLion.
