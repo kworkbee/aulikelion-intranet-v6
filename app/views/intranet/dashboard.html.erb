@@ -1,0 +1,104 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>환영합니다! <%= current_user.name %>님</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">EVENTS</h5>
+                    <h4 class="card-title" style="font-weight: 600;">예정 이벤트</h4>
+                </div>
+                <div class="card-body" style="position: relative;">
+                  <div id="calendar"></div>
+                  <script>
+                      $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json?recent', maxTime: '24:00:00', height: 500 });
+                  </script>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons fas fa-sync spin"></i> 방금 전 업데이트됨
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">HOMEWORKS</h5>
+                    <h4 class="card-title" style="font-weight: 600;">과제</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                      <span class="subtitle">신규과제(1주 내)</span><br>
+                      <span class="big"><%= @newHomeworks %></span>건
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                      <span class="subtitle">미완료과제</span><br>
+                      <span class="big"><%= @nonCompletedHomeworks %></span>건
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="now-ui-icons fas fa-sync spin"></i> 방금 전 업데이트 됨
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+                <h5 class="card-category">RECENT POSTS</h5>
+                <h4 class="card-title" style="font-weight: 600;">최근 게시물</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="text-primary">
+                      <th>
+                        구분
+                      </th>
+                      <th>
+                        제목
+                      </th>
+                      <th>
+                        작성자
+                      </th>
+                      <th>
+                        작성일
+                      </th>
+                    </thead>
+                    <tbody>
+                      <% Post.where(created_at: 1.week.ago..DateTime.now).each do |p| %>
+                      <tr>
+                        <td>
+                          <% case p.category %>
+                          <% when 1 %>
+                          공지사항
+                          <% when 2 %>
+                          자유게시판
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= link_to p.title, view_path(p.id) %>
+                        </td>
+                        <td>
+                          <%= link_to p.user.name, member_path(p.user.id) %>
+                        </td>
+                        <td>
+                          <%= p.created_at.strftime("%m/%d") %>
+                        </td>
+                      </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>

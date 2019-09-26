@@ -1,0 +1,41 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>게시물 보기</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category text-right">
+                        <% case @post.category %>
+                        <% when 1 %>
+                        공지사항 | 게시번호 <%= @post.id %> | 게시일자 <%= @post.created_at.strftime("%m/%d") %> | 조회수 <%= @post.views.count %>
+                        <% when 2 %>
+                        자유게시판 | 게시번호 <%= @post.id %> | 게시일자 <%= @post.created_at.strftime("%m/%d") %> | 조회수 <%= @post.views.count %>
+                        <% end %>
+                    </h5>
+                    <h4 class="card-title" style="font-weight: 600;">
+                        <%= @post.title %>
+                    </h4>
+                </div>
+                <div class="card-body" style="min-height: 50vh">
+                    <%= @post.content.html_safe %>
+                </div>
+                <div class="card-footer">
+                    <% case @post.category %>
+                    <% when 1 %>
+                    <%= link_to "목록", intranet_notice_path, class: "btn btn-info" %>
+                    <% when 2 %>
+                    <%= link_to "목록", intranet_freeboard_path, class: "btn btn-info" %>
+                    <% end %>
+                    <% if @post.user.id == current_user.id then %>
+                        <%= link_to "편집", pedit_path(@post.id), class: "btn btn-warning" %>
+                        <%= link_to "삭제", remove_post_path(@post.id), class: "btn btn-primary", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까? 삭제 시, 복구가 불가능합니다." %>
+                    <% end %>
+                    <hr>
+                    <%= render 'templates/reply' %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

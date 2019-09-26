@@ -1,0 +1,10 @@
+*/.DS_Store
+*/.keep
+/.bundle
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*
+!/log/.keep
+/tmp
+/public
+.DS_Store

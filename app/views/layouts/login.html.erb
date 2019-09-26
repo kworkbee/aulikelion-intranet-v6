@@ -1,0 +1,24 @@
+<!DOCUMENT html>
+<html lang="ko">
+    <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <title>LIKELION :: 아주대학교 인트라넷</title>
+        <link href="https://cdn.rawgit.com/filipelinhares/ress/master/dist/ress.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/font-kopub/1.0/kopubdotum.css" rel="stylesheet">
+        <%= stylesheet_link_tag "login", "data-turbolinks-track": false %>
+        <%= javascript_include_tag "login", "data-turbolinks-track": false %>
+    </head>
+    <body>
+        <div class="cover"></div>
+        <div class="valign-wrapper">
+            <header>
+                <div class="likelion">LIKELION</div>
+                <h1>멋쟁이사자처럼<br>인트라넷<br>(아주대학교)</h1>
+                <footer>LIKELION</footer>
+            </header>
+            <%= yield %>
+        </div>
+    </body>
+</html>

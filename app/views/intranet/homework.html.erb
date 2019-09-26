@@ -1,0 +1,40 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>과제</header>
+</div>
+<div class="content">
+    <div class="row">
+        <% if @homeworks.count == 0 then %>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body no-data">
+                    <i class="fas fa-exclamation"></i>
+                    <h4>아직 주어진 과제가 없습니다!</h4>
+                </div>
+            </div>
+        </div>
+        <% else %>
+        <% @homeworks.each do |h| %>
+        <div class="col-xs-3 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">과제 <%= h.id %> | <strong>마감일 <%= h.closing.strftime("%m/%d") %></strong></h5>
+                    <h4 class="card-title"><%= h.title %></h4>
+                </div>
+                <div class="card-body">
+                    <%= h.content.html_safe %>
+                </div>
+                <div class="card-footer">
+                   <% if h.closing < Time.now then %>
+                   <%= link_to "과제 마감", nil, class: "btn btn-block btn-danger", disabled: true %>
+                   <% elsif h.submissions.where(user_id: current_user.id).count < 1 %>
+                   <%= link_to "과제 제출", submission_path(h.id), class: "btn btn-block btn-primary" %>
+                   <% else %>
+                   <%= link_to "과제 수정", submission_path(h.id), class: "btn btn-block btn-info" %>
+                   <% end %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>

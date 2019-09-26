@@ -1,0 +1,30 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>소속 멤버 보기</header>
+</div>
+<div class="content">
+    <div class="row">
+        <% @members.each do |member| %>
+        <div class="col-md-6 col-lg-4">
+            <div class="card card-user">
+                <div class="image">
+                    <%= image_tag "background.jpg" %>
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                        <a href="<%= member_path(member.id) %>">
+                            <%= image_tag member.thumb, class:"avatar border-gray" %>
+                            <h5 class="title"><%= member.name %></h5>
+                        </a>
+                        <p class="description">
+                            <%= member.email %>
+                        </p>
+                    </div>
+                    <p class="description text-center">
+                        <%= member.introduction %>
+                    </p>
+                </div>
+            </div> 
+        </div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>예정된 이벤트</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">EVENTS</h5>
+                    <h4 class="card-title" style="font-weight: 600">이벤트</h4>
+                </div>
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+                <div class="card-footer">
+                    <% if current_user.level == 2 then %>
+                        <%= link_to "이벤트 등록", new_event_path, class: "btn btn-primary btn-block" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json', maxTime: '24:00:00' });
+</script>

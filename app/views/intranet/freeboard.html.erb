@@ -1,0 +1,49 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>자유게시판</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">FREEBOARD</div>
+                <div class="card-body">
+                    <% if @post.count == 0 then %>
+                    <div class="no-data">
+                        <i class="fas fa-exclamation"></i>
+                        <h4>게시된 글이 없습니다</h4>
+                    </div>
+                    <% else %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @post.each do |p| %>
+                                <tr>
+                                    <td><%= p.id %></td>
+                                    <td><%= link_to p.title, view_path(p.id) %></td>
+                                    <td><%= link_to p.user.name, member_path(p.user.id) %></td>
+                                    <td><%= p.created_at.strftime("%m/%d %H:%M") %></td>
+                                    <td><%= p.views.count %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% end %>
+                </div>
+                <div class="card-footer">
+                    <%= paginate @post %>
+                    <%= link_to "게시물 작성", fedit_path, class: "btn btn-primary btn-block" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

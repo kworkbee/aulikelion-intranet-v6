@@ -1,0 +1,37 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>사진 갤러리</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">GALLERY</div>
+                <div class="card-body">
+                    <div class="pics">
+                        <div class="row" style="margin: 0 1rem;">
+                            <% if @image.count == 0 then %>
+                            <div class="no-data col-lg-12">
+                                <i class="fas fa-exclamation"></i>
+                                <h4>게시된 사진이 없습니다</h4>
+                            </div>
+                            <% else %>
+                            <% @image.each do |image| %>
+                            <article class="pic col-md-4 col-lg-6">
+                                <%= image_tag image.file %>
+                                <hr>
+                                <h5 class="title"><%= image.title %></h5>
+                                <h6><%= link_to image.user.name, member_path(image.user.id) %></h6>
+                            </article>
+                            <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <%= paginate @image %>
+                    <%= link_to "사진 업로드", new_image_path, class: "btn btn-primary btn-block" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

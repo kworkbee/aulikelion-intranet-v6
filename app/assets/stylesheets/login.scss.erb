@@ -1,0 +1,215 @@
+/*
+*= require form
+*/
+
+$base-color: #F7971E;
+
+body {
+    font-family: "Montserrat", "KoPub Dotum", sans-serif;
+    margin: 0; padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background: url('<%= image_path "background.jpg" %>') no-repeat center center/cover;
+}
+
+.cover {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,.2);
+    z-index: 0;
+}
+
+.valign-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
+    min-height: 22rem;
+    background: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 15px 1px rgba(39, 39, 39, .8);
+    box-shadow: 0 1px 15px 1px rgba(39, 39, 39, .8);
+    z-index: 1;
+    & header {
+        position: relative;
+        width: 30%;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1vh;
+        background: $base-color !important;
+        color: white;
+        border-radius: 5px 0 0 5px;
+        padding: 1rem;
+        & h1 {
+            font-size: 2.55vh;
+        }
+        & .likelion {
+            background: url('<%= image_path "likelion.png" %>') no-repeat center center/contain;
+            width: 100%;
+            height: 15vh;
+            text-indent: -9999px;
+        }
+        & footer {
+            position: absolute;
+            background: url('https://d2hmp4n7p97ldw.cloudfront.net/assets/logo/likelion-white-a930fbcdf3042a50ba882ece9c02f43536971297a8e143e212d9b92d653bfa44.png') no-repeat center center/contain;
+            width: 100%;
+            height: 20px;
+            bottom: 16px;
+            left: 50%;
+            text-indent: -9999px;
+            transform: translateX(-50%);
+        }
+    }
+    
+    & .container {
+        width: 70%;
+    }
+}
+
+.container {
+    position: relative;
+    & form[novalidate] {
+        position: relative;
+        & h2 {
+            text-align: center;
+            font-size: 3vh;
+            font-weight: 100;
+            margin: 2rem 0 0 0;
+        }
+        & .form-inputs {
+            padding: 2rem;
+            & input {
+                width: 100%;
+                font-weight: 100;
+                font-size: 1rem;
+                padding: .5rem 1rem;
+                margin: .5rem 0;
+            }
+        }
+        & label {
+            display: none;
+        }
+        & .hint {
+            font-weight: 600;
+        }
+        & input[type='submit'] {
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: #ff5e52;
+            padding: 1rem 0;
+            color: white;
+            border-radius: 0 0 5px 0;
+            transition: all .2s ease-in;
+            &:hover {
+                background: red;
+            }
+        }
+        & .shared {
+            & a {
+                display: block;
+                width: 50%;
+                text-decoration: none;
+                text-align: center;
+                padding: .6rem 0;
+                margin: 0 auto;
+                border-radius: 2rem;
+                border: 2px solid tomato;
+                color: tomato;
+                font-weight: 700;
+                font-size: .8rem;
+                transition: all .3s ease-out;
+                &:hover {
+                    background: tomato;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+span.error, .error_notification {
+    display: block;
+    margin: .5rem auto;
+    background: red;
+    text-align: center;
+    color: white;
+    width: 60%;
+    font-weight: 100;
+    padding: .5rem 0;
+}
+
+.error_notification {
+    width: 80%;
+}
+
+@media (min-device-width: 1281px) {
+    body {
+        font-size: 20px;
+    }
+}
+
+@media (max-device-width: 1280px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+@media (min-device-width: 960px) {
+    .valign-wrapper {
+        width: 80%;
+    }
+}
+
+@media (max-device-width: 960px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .valign-wrapper {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 960px) {
+    .valign-wrapper {
+        flex-direction: column;
+        & header, .container {
+            width: 100%;
+        }
+        & header {
+            height: 40vh;
+        }
+    }
+}
+
+@media (max-device-width: 800px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .valign-wrapper {
+        width: 90vw;
+        flex-direction: column;
+        & header {
+            width: 100%;
+            min-height: 13rem;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        & .container {
+            width: 100%;
+            min-height: 300px;
+        }
+    }
+}
+
+@media (max-device-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+}

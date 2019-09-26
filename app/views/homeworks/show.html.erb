@@ -1,0 +1,27 @@
+<div class="panel-header panel-header-lg center-header">
+    <header>과제 상세</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">과제 <%= @homework.id %> | 마감일 <strong><%= @homework.closing.strftime("%m/%d %H:%M") %></strong></h5>
+                    <h4 class="card-title"><%= @homework.title %></h4>
+                </div>
+                <div class="card-body">
+                    <%= @homework.content.html_safe %>
+                </div>
+                <div class="card-footer">
+                    <% if @homework.submissions.where(user_id: current_user.id).count == 0 then %>
+                    <%= link_to "과제 제출", submit_homework_path(@homework.id), class: "btn btn-primary" %>
+                    <% elsif Time.now > @homework.closing then %>
+                    <%= link_to "과제 마감", nil, class: "btn btn-success", disabled: true %>
+                    <% else %>
+                    <%= link_to "과제 제출", nil, class: "btn btn-success", disabled: true %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

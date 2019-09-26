@@ -1,0 +1,152 @@
+* {
+ font-family: "Montserrat", "Helvetica Neue", "KoPub Dotum", sans-serif;
+}
+body {
+    overflow: hidden;
+    font-size: 18px;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000000;
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.loaded .loader {
+    display: none;
+}
+
+body.scrollable {
+    overflow: scroll;
+}
+
+@media screen and (max-device-width: 480px) {
+    body {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-device-width: 800px) {
+    body {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-device-width: 960px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-device-width: 1280px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-device-width: 1281px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+.center-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-header header {
+    font-weight: 100;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(0,0,0,.6);
+}
+
+table.table th:first-child, table.table th:last-child {
+    width: 10%;
+}
+
+table.table th:nth-child(2) {
+    width: 50%;
+}
+
+table.table th:nth-child(3), table.table th:nth-child(4) {
+    width: 15%;
+}
+
+table.homework_status th:not(:last-child) {
+    width: 15%;
+}
+
+table.homework_status th:last-child {
+    width: 55%;
+}
+
+.no-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-data i {
+    font-size: 5vw;
+}
+
+.no-data h4 {
+    font-weight: 100;
+}
+
+.fc-time {
+  display: none;
+}
+
+.fc-title {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.card-body {
+  position: relative;
+  min-height: 50vh;
+}
+
+// Dashboard
+span.big {
+  font-size: 15vh;
+  text-shadow: 0 0 10px rgba(36,36,36,.5);
+}
+
+// Gallery
+article.pic {
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    padding: 1rem;
+    text-align: center;
+}
+
+// Pagination
+nav.pagination {
+    justify-content: center;
+    margin-bottom: 2rem;
+    & span {
+        list-style-type: none;
+        display: inline-block;
+        border-right: 1px solid #d7dadb;
+        padding: 1.1em 1.6em;
+        & a {
+            text-decoration: none;
+        }
+    }
+    & .current {
+        background-color: #fa4248;
+        color: white;
+    }
+}

@@ -1,0 +1,297 @@
+<div class="panel-header panel-header-lg center-header">
+    <canvas id="bigDashboardChart"></canvas>
+    <header style="position: absolute; bottom: 1.5rem; left: 1rem; font-size: 1.5em;">학생 인트라넷 이용현황</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">과제 관리</h5>
+                    <h4 class="card-title" style="font-weight: 600;">생성된 과제 <%= @homeworks.count %>건</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>과제명</th>
+                                    <th>마감일</th>
+                                    <th>제출자 현황(제출/총원)</th>
+                                    <th>변경/삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @homeworks.each do |h| %>
+                                <tr>
+                                    <td><%= h.id %></td>
+                                    <td><%= link_to h.title, homework_path(h.id) %></td>
+                                    <td><%= h.closing.strftime("%m/%d") %></td>
+                                    <td><%= h.submissions.count %>/<%= User.all.count %></td>
+                                    <td>
+                                        <%= link_to "상세", submissions_status_path(h.id), class: "btn btn-sm btn-info" %>
+                                        <%= link_to "수정", edit_homework_path(h.id), class: "btn btn-warning btn-sm" %>
+                                        <%= link_to "삭제", homework_path(h.id), class: "btn btn-danger btn-sm", "data-method": "DELETE", "data-confirm": "삭제하시겠습니까? 삭제 시 복구가 불가능합니다." %>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <%= link_to "과제 생성", new_homework_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">회원 관리</h5>
+                    <h4 class="card-title" style="font-weight: 600;"><%= User.all.count %>명의 6기 멋사</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>구분</th>
+                                    <th>이름</th>
+                                    <th>최근접속</th>
+                                    <th>회원승인</th>
+                                    <th>패스워드 초기화</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% User.all.each do |user| %>
+                                <tr>
+                                    <td>
+                                        <% case user.level %>
+                                        <% when 1 %>
+                                        학생
+                                        <% when 2 %>
+                                        운영진
+                                        <% end %>
+                                    </td>
+                                    <td><%= link_to user.name, member_path(user.id) %></td>
+                                    <td>
+                                        <% unless user.logs.last.nil? %>
+                                        <%= user.logs.last.created_at.strftime("%m/%d %H:%M") %>
+                                        <% else %>
+                                        접속내역 없음
+                                        <% end %>
+                                    </td>
+                                    <td>
+                                        <% if user.accepted or user.level == 2 %>
+                                        승인됨
+                                        <% else %>
+                                        <%= link_to "승인", accept_user_path(user.id), class: "btn btn-sm btn-warning", "data-method": "PATCH", "data-confirm": "승인하시겠습니까?" %>
+                                        <% end %>
+                                        <%= link_to "삭제", remove_user_path(user.id), class: "btn btn-sm btn-danger", "data-method": "DELETE", "data-confirm": "회원을 삭제합니다. 롤백이 불가하니 신중히 선택하여주세요." %>
+                                    </td>
+                                    <td><%= link_to "초기화", reset_password_path(user.id), class: "btn btn-sm btn-danger", "data-method": "PATCH", "data-confirm": "패스워드 초기화를 진행하시겠습니까? 초기 비밀번호는 aulikelion이며 실행한 이후 롤백이 불가합니다." %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+main = {
+    initDashboardPageCharts: function(){
+
+      chartColor = "#FFFFFF";
+
+      // General configuration for the charts with Line gradientStroke
+      gradientChartOptionsConfiguration = {
+          maintainAspectRatio: false,
+          legend: {
+              display: false
+          },
+          tooltips: {
+            bodySpacing: 4,
+            mode:"nearest",
+            intersect: 0,
+            position:"nearest",
+            xPadding:10,
+            yPadding:10,
+            caretPadding:10
+          },
+          responsive: 1,
+          scales: {
+              yAxes: [{
+                display:0,
+                gridLines:0,
+                ticks: {
+                    display: false
+                },
+                gridLines: {
+                    zeroLineColor: "transparent",
+                    drawTicks: false,
+                    display: false,
+                    drawBorder: false
+                }
+              }],
+              xAxes: [{
+                display:0,
+                gridLines:0,
+                ticks: {
+                    display: false
+                },
+                gridLines: {
+                  zeroLineColor: "transparent",
+                  drawTicks: false,
+                  display: false,
+                  drawBorder: false
+                }
+              }]
+          },
+          layout:{
+            padding:{left:0,right:0,top:15,bottom:15}
+          }
+      };
+
+      gradientChartOptionsConfigurationWithNumbersAndGrid = {
+          maintainAspectRatio: false,
+          legend: {
+              display: false
+          },
+          tooltips: {
+            bodySpacing: 4,
+            mode:"nearest",
+            intersect: 0,
+            position:"nearest",
+            xPadding:10,
+            yPadding:10,
+            caretPadding:10
+          },
+          responsive: true,
+          scales: {
+              yAxes: [{
+                gridLines:0,
+                gridLines: {
+                    zeroLineColor: "transparent",
+                    drawBorder: false
+                }
+              }],
+              xAxes: [{
+                display:0,
+                gridLines:0,
+                ticks: {
+                    display: false
+                },
+                gridLines: {
+                  zeroLineColor: "transparent",
+                  drawTicks: false,
+                  display: false,
+                  drawBorder: false
+                }
+              }]
+          },
+          layout:{
+            padding:{left:0,right:0,top:15,bottom:15}
+          }
+      };
+
+      var ctx = document.getElementById('bigDashboardChart').getContext("2d");
+
+      var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+      gradientStroke.addColorStop(0, '#80b6f4');
+      gradientStroke.addColorStop(1, chartColor);
+
+      var gradientFill = ctx.createLinearGradient(0, 200, 0, 50);
+      gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+      gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
+
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: ["최근 4주", "최근 3주", "최근 2주", "최근 1주"],
+              datasets: [{
+                  label: "Data",
+                  borderColor: chartColor,
+                  pointBorderColor: chartColor,
+                  pointBackgroundColor: "#1e3d60",
+                  pointHoverBackgroundColor: "#1e3d60",
+                  pointHoverBorderColor: chartColor,
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 7,
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 5,
+                  fill: true,
+                  backgroundColor: gradientFill,
+                  borderWidth: 2,
+                  data: [<%= Log.where(created_at: 4.weeks.ago..3.weeks.ago).count %>, <%= Log.where(created_at: 3.weeks.ago..2.weeks.ago).count %>, <%= Log.where(created_at: 2.weeks.ago..1.week.ago).count %>, <%= Log.where(created_at: 1.week.ago..Time.now).count %>]
+              }]
+          },
+          options: {
+              layout: {
+                  padding: {
+                      left: 20,
+                      right: 20,
+                      top: 0,
+                      bottom: 0
+                  }
+              },
+              maintainAspectRatio: false,
+              tooltips: {
+                backgroundColor: '#fff',
+                titleFontColor: '#333',
+                bodyFontColor: '#666',
+                bodySpacing: 4,
+                xPadding: 12,
+                mode: "nearest",
+                intersect: 0,
+                position: "nearest"
+              },
+              legend: {
+                  position: "bottom",
+                  fillStyle: "#FFF",
+                  display: false
+              },
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          fontColor: "rgba(255,255,255,0.4)",
+                          fontStyle: "bold",
+                          beginAtZero: true,
+                          maxTicksLimit: 5,
+                          padding: 10
+                      },
+                      gridLines: {
+                          drawTicks: true,
+                          drawBorder: false,
+                          display: true,
+                          color: "rgba(255,255,255,0.1)",
+                          zeroLineColor: "transparent"
+                      }
+
+                  }],
+                  xAxes: [{
+                      gridLines: {
+                          zeroLineColor: "transparent",
+                          display: false,
+
+                      },
+                      ticks: {
+                          padding: 10,
+                          fontColor: "rgba(255,255,255,0.4)",
+                          fontStyle: "bold"
+                      }
+                  }]
+              }
+          }
+      });
+
+    }
+};
+
+$(document).ready(function() {
+    main.initDashboardPageCharts();
+});
+</script>

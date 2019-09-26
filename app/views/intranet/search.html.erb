@@ -1,0 +1,170 @@
+<div class="panel-header panel-header-lg center-header">
+    <header><%= params[:keyword] %>에 대한 검색 결과</header>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">From Posts</h5>
+                    <h4 class="card-title" style="font-weight: 600">게시물에서</h4>
+                </div>
+                <div class="card-body">
+                    <% if @fromPost.count == 0 then %>
+                    <div class="no-data">
+                        <i class="fas fa-exclamation"></i>
+                        <h4>관련된 글이 없습니다</h4>
+                    </div>
+                    <% else %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>구분</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                    <th>조회</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @fromPost.each do |p| %>
+                                <tr>
+                                    <td><% case p.category %><% when 1 %>공지사항<% when 2 %>자유게시판<% end %></td>
+                                    <td><%= link_to p.title, view_path(p.id) %></td>
+                                    <td><%= link_to p.user.name, member_path(p.user.id) %></td>
+                                    <td><%= p.created_at.strftime("%m/%d") %></td>
+                                    <td><%= p.views.count %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% end %>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">From members</h5>
+                    <h4 class="card-title" style="font-weight: 600">멤버 중에서</h4>
+                </div>
+                <div class="card-body">
+                    <% if @fromMembers.count == 0 then %>
+                    <div class="no-data">
+                        <i class="fas fa-exclamation"></i>
+                        <h4>관련된 멤버가 없습니다</h4>
+                    </div>
+                    <% else %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>구분</th>
+                                    <th>이름</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @fromMembers.each do |m| %>
+                                <tr>
+                                    <td><% case m.level %><% when 1 %>멤버<% when 2 %>운영진<% end %></td>
+                                    <td><%= link_to m.name, member_path(m.id) %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% end %>
+                </div>
+                <div class="card-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">From events</h5>
+                    <h4 class="card-title" style="font-weight: 600">이벤트 중에서</h4>
+                </div>
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+                <script>
+                    $('#calendar').fullCalendar({ lang: 'ko', themeSystem: 'minty', events: '<%= event_json_path%>.json?search=<%= params[:keyword] %>' });
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">From gallery</h5>
+                    <h4 class="card-title" style="font-weight: 600">사진 중에서</h4>
+                </div>
+                <div class="card-body">
+                    <% if @pictures.count == 0 then %>
+                    <div class="no-data">
+                        <i class="fas fa-exclamation"></i>
+                        <h4>관련된 사진이 없습니다</h4>
+                    </div>
+                    <% else %>
+                    <div class="pics">
+                        <div class="row" style="margin: 0 1rem;">
+                            <% @pictures.each do |image| %>
+                            <article class="pic col-md-4 col-lg-6">
+                                <%= image_tag image.file %>
+                                <hr>
+                                <h5 class="title"><%= image.title %></h5>
+                                <h6><%= link_to image.user.name, member_path(image.user.id) %></h6>
+                            </article>
+                            <% end %>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">From homeworks</h5>
+                    <h4 class="card-title" style="font-weight: 600">과제 중에서</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>No</th>
+                                    <th>과제명</th>
+                                    <th>마감일</th>
+                                    <th>제출여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @fromHomeworks.each do |h| %>
+                                <tr>
+                                    <td><%= h.id %></td>
+                                    <td><%= link_to h.title, homework_path(h.id) %></td>
+                                    <td><%= h.closing.strftime("%m/%d %H:%M") %></td>
+                                    <td><% if h.submissions.where(user_id: current_user.id).count > 0 %>제출<% else %>미제출<% end %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
